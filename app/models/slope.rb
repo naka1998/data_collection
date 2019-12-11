@@ -1,0 +1,2 @@
+class Slope < ApplicationRecord
+end
