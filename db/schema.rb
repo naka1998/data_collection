@@ -10,50 +10,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_11_080456) do
+ActiveRecord::Schema.define(version: 2019_12_11_080842) do
 
   create_table "elevators", force: :cascade do |t|
+    t.integer "pin_id"
     t.string "description"
-    t.integer "from"
-    t.integer "to"
+    t.integer "from", null: false
+    t.integer "to", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["pin_id"], name: "index_elevators_on_pin_id"
   end
 
   create_table "pins", force: :cascade do |t|
-    t.integer "type"
-    t.float "lat"
-    t.float "lng"
-    t.integer "floor"
+    t.integer "station_id"
+    t.integer "data_type", null: false
+    t.float "lat", null: false
+    t.float "lng", null: false
+    t.integer "floor", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["station_id"], name: "index_pins_on_station_id"
   end
 
   create_table "restrooms", force: :cascade do |t|
+    t.integer "pin_id"
     t.string "description"
-    t.boolean "is_multipurpose"
+    t.boolean "is_multipurpose", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["pin_id"], name: "index_restrooms_on_pin_id"
   end
 
   create_table "slopes", force: :cascade do |t|
+    t.integer "pin_id"
     t.string "description"
-    t.integer "level"
+    t.integer "level", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["pin_id"], name: "index_slopes_on_pin_id"
   end
 
-  create_table "staions", force: :cascade do |t|
-    t.string "name"
+  create_table "stations", force: :cascade do |t|
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "steps", force: :cascade do |t|
+    t.integer "pin_id"
     t.string "description"
-    t.integer "level"
+    t.integer "level", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["pin_id"], name: "index_steps_on_pin_id"
   end
 
 end

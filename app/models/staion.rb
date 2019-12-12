@@ -1,2 +1,0 @@
-class Staion < ApplicationRecord
-end
