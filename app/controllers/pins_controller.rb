@@ -9,13 +9,13 @@ class PinsController < ApplicationController
     p @pin
     case @pin.data_type
     when "elevator" then
-      @pin.elevators.build
+      @pin.build_elevator
     when "restroom" then
-      @pin.restrooms.build
+      @pin.build_restroom
     when "slope" then
-      @pin.slopes.build
+      @pin.build_slope
     when "step" then
-      @pin.steps.build
+      @pin.build_step
     else
       puts "error"
     end
@@ -24,10 +24,9 @@ class PinsController < ApplicationController
   def create
     @pin = Pin.new(pin_params)
     @pin.station_id = 1
-    if @pin.valid?
+    if @pin.save
       redirect_to pins_path
     else
-      debugger
       render new_pin_path
     end
   end
@@ -50,10 +49,10 @@ class PinsController < ApplicationController
 
   private
   def pin_params
-    params.require(:pin).permit(:data_type, :lat, :lng,
-      elevators_attributes: [:description, :from, :to],
-      restrooms_attributes: [:description, :is_multipurpose],
-      steps_attributes: [:description, :level],
-      slopes_attributes: [:description, :level])
+    params.require(:pin).permit(:data_type, :lat, :lng, :floor,
+      elevator_attributes: [:description, :from, :to],
+      restroom_attributes: [:description, :is_multipurpose],
+      step_attributes: [:description, :level],
+      slope_attributes: [:description, :level])
   end
 end
