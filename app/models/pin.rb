@@ -1,13 +1,15 @@
 class Pin < ApplicationRecord
   belongs_to :station
-  has_many :elevators
-  has_many :restrooms
-  has_many :slopes
-  has_many :steps
-  accepts_nested_attributes_for :elevators, allow_destroy: true
-  accepts_nested_attributes_for :restrooms, allow_destroy: true
-  accepts_nested_attributes_for :slopes, allow_destroy: true
-  accepts_nested_attributes_for :steps, allow_destroy: true
+  has_one :elevator
+  has_one :restroom
+  has_one :slope
+  has_one :step
+  
+  accepts_nested_attributes_for :elevator, allow_destroy: true
+  accepts_nested_attributes_for :restroom, allow_destroy: true
+  accepts_nested_attributes_for :slope, allow_destroy: true
+  accepts_nested_attributes_for :step, allow_destroy: true
+  
   enum data_type:{
     elevator: 1,
     restroom: 2,
