@@ -1,0 +1,61 @@
+<h2>新規作成画面</h2>
+<% if @pin.errors.any? %>
+  <%= @pin.errors.full_message %>
+<% end %>
+<%= form_with model: @pin, local: true do |f| %>
+  <div>
+    <%= f.label :data_type, "種別: " %>
+    <%= f.text_field :data_type, value: @pin.data_type, readonly: true %>
+  </div>
+  <div>
+    <%= f.label :lat, "緯度: " %>
+    <%= f.text_field :lat, value: @pin.lat, readonly: true %>
+  </div>
+  <div>
+    <%= f.label :lat, "経度: " %>
+    <%= f.text_field :lng, value: @pin.lng, readonly: true %>
+  </div>
+  <div>
+    <%= f.fields_for :elevators do |g| %>
+      <%= g.label :description, "説明: "%>
+      <%= g.text_area :description %>
+      <p>「どこから > どこまで」、となるよう書いてください</p>
+      <%= g.label :from, "どこから: "%>
+      <%= g.number_field :from %>
+      <%= g.label :to, "どこまで: " %>
+      <%= g.number_field :to %>
+    <% end %>
+
+    <%= f.fields_for :restrooms do |g| %>
+      <%= g.label :description, "説明: "%>
+      <%= g.text_area :description %>
+      <%= g.label :is_multipurpose, "多目的トイレ"%>
+      <%= g.select :is_multipurpose, [["あり",true],["なし",false]]%>
+    <% end %>
+
+    <%= f.fields_for :steps do |g| %>
+      <%= g.label :description, "説明: "%>
+      <%= g.text_area :description %>
+      <%= g.label :level, "レベル: "%>
+      <%= g.select :level, [
+        ["一人で乗り越えられるが危険", 1],
+        ["介助者がいれば乗り越えられる", 2],
+        ["介助者がいても乗り越えるのが難しい", 3]
+      ], prompt: "選択してください" %>
+    <% end %>
+
+    <%= f.fields_for :slopes do |g| %>
+      <%= g.label :description, "説明: "%>
+      <%= g.text_area :description %>
+      <%= g.label :level, "レベル: "%>
+      <%= g.select :level, [
+        ["一人でも上り下りできる", 1],
+        ["介助者がいれば上り下りできる", 2],
+        ["介助者がいても上り下りが難しい", 3]
+      ], prompt: "選択してください" %>
+
+    <% end %>
+  </div>
+  <%= f.submit '投稿' %>
+<% end %>
+<%= link_to '戻る', pins_path %>
