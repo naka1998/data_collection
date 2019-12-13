@@ -1,15 +1,21 @@
 let markers = [];
 let map;
 // これ付けないとエラー吐く
+window.addEventListener('DOMContentLoaded', function () {
+  const currentPositionBtn = document.getElementById("currentPositionBtn");
+  currentPositionBtn.addEventListener('click', getPlace, false);
+})
 window.onload = () => {
-  initMap();
+  const lat = 35.465809;
+  const lng = 139.6223;
+  const initialPositon = { lat: lat, lng: lng };
+  initMap(initialPositon);
 }
-// 初期化処理
-const initMap = () => {
-  const myLatlng = { lat: 35.465809, lng: 139.6223 };
+// 初期化処理(position={lat: float, lng: float})
+const initMap = (position) => {
   map = new google.maps.Map(document.getElementById("map"), {
     zoom: 18,
-    center: myLatlng
+    center: position
   });
   map.addListener("click", (e) => {
     // marker.setMap(null);
@@ -19,6 +25,7 @@ const initMap = () => {
     }
   });
 };
+
 // 指定された場所にピン指して移動する
 const setPin = (latlng) => {
   const marker = new google.maps.Marker({
@@ -54,3 +61,27 @@ const showLocation = (latlng) => {
     document.getElementById("lng").value = lng;
   }
 };
+
+// 現在地を取得する
+const getPlace = () => {
+  //Geolocation apiがサポートされていない場合
+  if (!navigator.geolocation) {
+    alert("Geolocationはあなたのブラウザーでサポートされておりません");
+    return;
+  }
+  const success = (pos) => {
+    const currentPosition = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+    setPin(currentPosition);
+  };
+  const error = () => {
+    console.log("error");
+  };
+  // getCurrentPositionのオプション
+  const options = {
+    enableHighAccuracy: false,
+    timeout: 5000,
+    maximumAge: 0
+  };
+  navigator.geolocation.getCurrentPosition(success, error, options);
+};
+

@@ -1,6 +1,6 @@
 <h2>index画面</h2>
-<p>緯度経度のマップ</p>
 <div id="map"></div>
+<button id="currentPositionBtn">現在地を取得</button>
 <%= form_with(model: @pin, url: new_pin_path, method: :get, local: true) do |f| %>
   <div>
     <%= f.label :lat ,"緯度"%>
