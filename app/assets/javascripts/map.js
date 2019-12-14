@@ -1,37 +1,54 @@
 let markers = [];
+let init_markers = [];
 let map;
 // これ付けないとエラー吐く
 window.addEventListener('DOMContentLoaded', function () {
   const currentPositionBtn = document.getElementById("currentPositionBtn");
   currentPositionBtn.addEventListener('click', getPlace, false);
-})
+});
 window.onload = () => {
   const lat = 35.465809;
   const lng = 139.6223;
   const initialPositon = { lat: lat, lng: lng };
-  initMap(initialPositon);
+  const pins = JSON.parse(document.getElementById("pins_data").getAttribute("data"));
+  initMap(initialPositon, pins);
 }
 // 初期化処理(position={lat: float, lng: float})
-const initMap = (position) => {
+const initMap = (position, pins) => {
   map = new google.maps.Map(document.getElementById("map"), {
     zoom: 18,
     center: position
   });
+  showAllPins(pins);
   map.addListener("click", (e) => {
-    // marker.setMap(null);
     setPin(e.latLng);
     for (let i = 0; i < markers.length - 1; i++) {
       markers[i].setMap(null);
     }
   });
 };
-
-// 指定された場所にピン指して移動する
-const setPin = (latlng) => {
+// 指定された場所のピンを作成
+const createPin = (latlng, icon = "https://maps.google.com/mapfiles/ms/icons/red-dot.png") => {
   const marker = new google.maps.Marker({
     position: latlng,
     map: map,
+    icon: icon,
   });
+  return marker;
+};
+
+// pinsの中身全部ピン指す
+const showAllPins = (pins) => {
+  const icon = "https://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+  for (let i = 0; i < pins.length; i++) {
+    console.log(pins[i]);
+    const pin = { lat: pins[i].lat, lng: pins[i].lng };
+    init_markers.push(createPin(pin, icon));
+  }
+};
+// 指定された場所にピン指して移動する
+const setPin = (latlng) => {
+  const marker = createPin(latlng);
   markers.push(marker);
   map.panTo(latlng);
   showLocation(marker.position);

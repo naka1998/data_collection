@@ -23,6 +23,7 @@
     <%= f.label :lat, "経度: " %>
     <%= f.text_field :lng, value: @pin.lng, readonly: true %>
   </div>
+  <hr>
   <div>
     <%= f.fields_for :elevator do |g| %>
       <%= g.label :description, "説明: "%>

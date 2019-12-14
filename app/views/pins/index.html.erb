@@ -13,7 +13,7 @@
   <%= f.select :data_type, Pin.data_types.keys.to_a,{} %>
   <%= f.submit "作成" %>
 <% end %>
-
+<div id="pins_data" data="<%= @pins.to_json %>"></div>
 <table>
   <tr>
     <td>id</td>
