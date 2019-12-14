@@ -5,6 +5,14 @@ let map;
 window.addEventListener('DOMContentLoaded', function () {
   const currentPositionBtn = document.getElementById("currentPositionBtn");
   currentPositionBtn.addEventListener('click', getPlace, false);
+  const setButton = document.getElementsByClassName("setButton");
+  for(let i = 0; i < setButton.length; i++){
+    setButton[i].addEventListener('click',(e) =>{
+      const location = {lat: Number(e.target.getAttribute("lat")), lng: Number(e.target.getAttribute("lng"))}
+      map.panTo(location);
+  } ,false);
+  }
+
 });
 window.onload = () => {
   const lat = 35.465809;
@@ -41,7 +49,6 @@ const createPin = (latlng, icon = "https://maps.google.com/mapfiles/ms/icons/red
 const showAllPins = (pins) => {
   const icon = "https://maps.google.com/mapfiles/ms/icons/blue-dot.png";
   for (let i = 0; i < pins.length; i++) {
-    console.log(pins[i]);
     const pin = { lat: pins[i].lat, lng: pins[i].lng };
     init_markers.push(createPin(pin, icon));
   }
