@@ -1,0 +1,72 @@
+label{
+  font-size: 22px;
+  line-height: 32px;
+}
+textarea,
+input[type="number"],
+input[type="text"] {
+  width: 100%;
+  padding: 10px 0px;
+  font-size: 14px;
+  font-size: 1.4rem;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+}
+
+textarea {
+  height: 100px; /* お好みの高さに */
+}
+
+/* フォーカス時の色変更 */
+
+textarea:focus,
+input[type="tel"]:focus,
+input[type="email"]:focus,
+input[type="text"]:focus {
+  border: 1px solid #333;
+}
+
+// セレクトタグ
+.form-select {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 38px;
+  font-size: 14px;
+  font-size: 1.4rem;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  overflow: hidden;
+  &::after {
+    position: absolute;
+    display: block;
+    content: '';
+    width: 0;
+    height: 0;
+    /* ここで下向き矢印指定　今回はCSSで */
+    border-top: 6px solid transparent;
+    border-left: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #333;
+    top: 50%;
+    right: 10px;
+    margin-top: -3px;
+    pointer-events: none;/* クリック出来るよう */
+  }
+  select {
+    width: 100%;
+    height: 35px;
+    font-size: 14px;
+    font-size: 1.4rem;
+    padding: 0 10px;
+    border: none;
+    position: relative;
+  }
+}

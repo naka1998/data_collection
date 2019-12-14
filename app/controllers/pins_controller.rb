@@ -6,7 +6,6 @@ class PinsController < ApplicationController
 
   def new
     @pin = Pin.new(pin_params)
-    p @pin
     case @pin.data_type
     when "elevator" then
       @pin.build_elevator
@@ -17,7 +16,8 @@ class PinsController < ApplicationController
     when "step" then
       @pin.build_step
     else
-      puts "error"
+      flash[:alert] = "種別が入力されていません"
+      redirect_to pins_path
     end
   end
 

@@ -30,19 +30,11 @@
       <%= g.text_area :description %>
       <div>
         <p>「どこから > どこまで」、となるよう書いてください</p>
-        <ul style="list-style:none;">
-          <li>
-            <%= g.label :from, "どこから: "%>
-            <%= g.number_field :from,value: 1 %>階
-          </li>
-          <li>
-            <%= g.label :to, "どこまで: " %>
-            <%= g.number_field :to, value: 1 %>階
-          </li>
-        </ul>
-      </div>      
-
-
+        <%= g.label :from, "どこから: "%>
+        <%= g.number_field :from,value: 1 %>階
+        <%= g.label :to, "どこまで: " %>
+        <%= g.number_field :to, value: 1 %>階
+      </div>
     <% end %>
 
     <%= f.fields_for :restroom do |g| %>
@@ -74,6 +66,10 @@
       ], prompt: "選択してください" %>
     <% end %>
   </div>
-  <%= f.submit '投稿' %>
+  <div id="d-flex">
+    <span class="setButton new_button">
+      <%= link_to '戻る', pins_path  %>
+    </span>
+    <%= f.submit '投稿', class:"submit-button new_button" %>
+  </div>
 <% end %>
-<%= link_to '戻る', pins_path %>
