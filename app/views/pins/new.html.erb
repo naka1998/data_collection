@@ -1,4 +1,4 @@
-<h2>新規作成画面</h2>
+<h1>新規作成画面</h1>
 <% if @pin.errors.any? %>
   <ul>
   <% @pin.errors.full_messages.each do |message| %>
@@ -41,35 +41,41 @@
       <%= g.label :description, "説明: "%>
       <%= g.text_area :description %>
       <%= g.label :is_multipurpose, "多目的トイレ"%>
-      <%= g.select :is_multipurpose, [["あり",true],["なし",false]]%>
+      <div class="form-select">
+        <%= g.select :is_multipurpose, [["あり",true],["なし",false]]%>
+      </div>
     <% end %>
 
     <%= f.fields_for :step do |g| %>
       <%= g.label :description, "説明: "%>
       <%= g.text_area :description %>
       <%= g.label :level, "レベル: "%>
-      <%= g.select :level, [
-        ["一人で乗り越えられるが危険", 1],
-        ["介助者がいれば乗り越えられる", 2],
-        ["介助者がいても乗り越えるのが難しい", 3]
-      ], prompt: "選択してください" %>
+      <div class="form-select">
+        <%= g.select :level, [
+          ["一人で乗り越えられるが危険", 1],
+          ["介助者がいれば乗り越えられる", 2],
+          ["介助者がいても乗り越えるのが難しい", 3]
+        ], prompt: "選択してください" %>
+      </div>
     <% end %>
 
     <%= f.fields_for :slope do |g| %>
       <%= g.label :description, "説明: "%>
       <%= g.text_area :description %>
       <%= g.label :level, "レベル: "%>
-      <%= g.select :level, [
-        ["一人でも上り下りできる", 1],
-        ["介助者がいれば上り下りできる", 2],
-        ["介助者がいても上り下りが難しい", 3]
-      ], prompt: "選択してください" %>
+      <div class="form-select">
+        <%= g.select :level, [
+          ["一人でも上り下りできる", 1],
+          ["介助者がいれば上り下りできる", 2],
+          ["介助者がいても上り下りが難しい", 3]
+        ], prompt: "選択してください" %>
+      </div>
     <% end %>
   </div>
-  <div id="d-flex">
-    <span class="setButton new_button">
-      <%= link_to '戻る', pins_path  %>
-    </span>
+  <div class="d-flex">
+    <section class="setButton new_button">
+      <%= link_to '戻る', pins_path %>
+    </section>
     <%= f.submit '投稿', class:"submit-button new_button" %>
   </div>
 <% end %>

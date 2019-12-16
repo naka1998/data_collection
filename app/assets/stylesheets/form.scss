@@ -1,6 +1,24 @@
-label{
-  font-size: 22px;
-  line-height: 32px;
+@media (max-width: 1119px) {
+  label{
+    font-size: 32px;
+    line-height: 50px;
+  }
+  textarea {
+    height: 100px; /* お好みの高さに */
+  }
+  /* フォーカス時の色変更 */
+  textarea:focus,
+  input[type="tel"]:focus,
+  input[type="email"]:focus,
+  input[type="text"]:focus {
+    border: 1px solid #333;
+  }
+}
+@media (min-width: 1200px) {
+  label{
+    font-size: 18px;
+    line-height: 22px;
+  }
 }
 textarea,
 input[type="number"],
@@ -15,20 +33,6 @@ input[type="text"] {
   -ms-border-radius: 4px;
   border-radius: 4px;
 }
-
-textarea {
-  height: 100px; /* お好みの高さに */
-}
-
-/* フォーカス時の色変更 */
-
-textarea:focus,
-input[type="tel"]:focus,
-input[type="email"]:focus,
-input[type="text"]:focus {
-  border: 1px solid #333;
-}
-
 // セレクトタグ
 .form-select {
   display: block;

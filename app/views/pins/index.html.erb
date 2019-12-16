@@ -2,48 +2,54 @@
 <section class="flash-alert">
   <%= flash[:alert] %>
 </section>
-<div id="map"></div>
-<div id="form-group">
-  <span id="currentPositionBtn">現在地を取得</span>
-  <%= form_with(model: @pin, url: new_pin_path, method: :get, local: true) do |f| %>
-    <div>
-      <%= f.label :lat ,"緯度: "%>
-      <%= f.text_field :lat, id: "lat", readonly: true %>
-      <%= f.label :lng ,"経度: "%>
-      <%= f.text_field :lng, id: "lng", readonly: true %>
-    </div>
-    <div>
-      <%= f.label :floor, "階数: "%>
-      <%= f.number_field :floor, in: 1..10, value: 1 %>
-    </div>
-    <div>
-      <%= f.label :data_type, "種類: "%>
-      <div class="form-select">
-        <%= f.select :data_type, Pin.data_types.keys.to_a, prompt: "選択してください" %> 
+<div class="d-flex">
+  <div id="map"></div>
+  <div id="form-group">
+    <section id="currentPositionBtn">現在地を取得</section>
+    <%= form_with(model: @pin, url: new_pin_path, method: :get, local: true) do |f| %>
+      <div>
+        <%= f.label :lat ,"緯度: "%>
+        <%= f.text_field :lat, id: "lat", readonly: true %>
+        <%= f.label :lng ,"経度: "%>
+        <%= f.text_field :lng, id: "lng", readonly: true %>
       </div>
-      <%= f.submit "作成", class:"submit-button" %>
-    </div>
-  <% end %>
-  <div id="pins_data" data="<%= @pins.to_json %>"></div>
+      <div>
+        <%= f.label :floor, "階数: "%>
+        <%= f.number_field :floor, in: 1..10, value: 1 %>
+      </div>
+      <div>
+        <%= f.label :data_type, "種類: "%>
+        <div class="form-select">
+          <%= f.select :data_type, Pin.data_types.keys.to_a, prompt: "選択してください" %> 
+        </div>
+        <%= f.submit "作成", class:"submit-button" %>
+      </div>
+    <% end %>
+    <div id="pins_data" data="<%= @pins.to_json %>"></div>
+  </div>
 </div>
 <div id="index_table">
   <table>
-    <tr>
-      <th>駅</th>
-      <th>種別</th>
-      <th>緯度</th>
-      <th>経度</th>
-      <td></td>
-      <td></td>
-    </tr>
+    <thead>
+      <tr>
+        <td class="set_button_col"></td>
+        <td class="station_col"><strong>駅</strong></td>
+        <td class="type_col"><strong>種別</strong></td>
+        <td class="latlng_col"><strong>緯度</strong></td>
+        <td class="latlng_col"><strong>経度</strong></td>
+        <td class="delete_button_col"></td>
+      </tr>
+    </thead>
     <% @pins.each do |p| %>
     <tr>
-      <td><%= p.station.name %></td>
-      <td><%= p.data_type %></td>
-      <td><%= p.lat %></td>
-      <td><%= p.lng %></td>
-      <td><button class="setButton" lat="<%= p.lat %>"lng="<%= p.lng %>" >地図の中心にセット</button></td>
-      <td><%= link_to '削除', pin_path(p), method: :delete %></td>
+      <td class="set_button_col">
+        <button class="setButton" lat="<%= p.lat %>"lng="<%= p.lng %>" >地図の中心にセット</button>
+      </td>
+      <td class="station_col"><%= p.station.name %></td>
+      <td class="type_col"><%= p.data_type %></td>
+      <td class="latlng_col"><%= p.lat %></td>
+      <td class="latlng_col"><%= p.lng %></td>
+      <td class="delete_button_col"><%= link_to '削除', pin_path(p), method: :delete, data:{confirm: "本当に削除しますか"} %></td>
     </tr>
     <% end %>
   </table>

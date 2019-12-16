@@ -1,0 +1,102 @@
+#currentPositionBtn,
+.setButton,
+.submit-button {
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  outline: none;
+  position: relative;
+  border-radius: 4px;
+  color: #fff;
+  -webkit-transition: none;
+  transition: none;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  &:active {
+    top: 3px;
+    box-shadow: none;
+  }
+  &::before,
+  &::after {
+    position: absolute;
+    z-index: -1;
+    display: block;
+    content: "";
+  }
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+@media (max-width: 1119px) {
+  #currentPositionBtn,
+  .submit-button {
+    width: 200px;
+    height: 80px;
+    font-size: 28px;
+    line-height: 80px;
+  }
+}
+@media (min-width: 1200px) {
+  #currentPositionBtn,
+  .submit-button {
+    width: 200px;
+    height: 40px;
+    font-size: 28px;
+    line-height: 40px;
+  }
+}
+#currentPositionBtn {
+  background-color: #1abc9c;
+  box-shadow: 0 3px 0 #0e8c73;
+}
+.submit-button {
+  float: right;
+  background-color: #668ad8;
+  box-shadow: 0 3px 0 #3d6bce;
+}
+@media (max-width: 1119px) {
+  .setButton {
+    height: 52px;
+    line-height: 52px;
+    font-size: 36px;
+  }
+}
+@media (min-width: 1200px) {
+  .setButton {
+    height: 32px;
+    line-height: 32px;
+  }
+}
+.setButton {
+  width: 90%;
+  background-color: #f34955;
+  box-shadow: 0 3px 0 #c23a44;
+}
+@media (max-width: 1119px) {
+  .new_button{
+    display: inline-block;
+    width: 180px;
+    height: 60px;
+    line-height: 52px;
+    font-size: 36px;
+    vertical-align: middle;
+    a{
+      text-decoration: none;
+      color: white;
+    }
+  }
+}
+@media (min-width: 1200px) {
+  .new_button{
+    width: 120px;
+    height: 36px;
+    line-height: 32px;
+    font-size: 22px;
+    vertical-align: middle;
+    a{
+      text-decoration: none;
+      color: white;
+    }
+  }
+}

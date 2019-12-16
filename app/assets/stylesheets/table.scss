@@ -1,0 +1,31 @@
+#index_table {
+  margin-top: 10px;
+  table {
+    width: 100%;
+    tr {
+      height: 60px;
+    }
+  }
+}
+@media (max-width: 1119px) { 
+  .latlng_col{
+    display: none;
+  }
+  .station_col,
+  .type_col,
+  .set_button_col,
+  .delete_button_col{
+    font-size: 32px;
+  }
+  .station_col,
+  .type_col{
+    width: 20%;
+  }
+  .set_button_col{
+    
+  }
+}
+@media (min-width: 1200px) {
+
+}
+
